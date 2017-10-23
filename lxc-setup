@@ -1,0 +1,22 @@
+#!/bin/bash
+
+run() { ./lxc-run "$1" bash -s; }
+
+setup() {
+
+echo "
+sudo sed -i -re 's/([a-z]{2}\.)?archive.ubuntu.com|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+sudo apt-get update 
+sudo apt-get install -y python-software-properties
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install -y gcc-4.8 g++-4.8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 20
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 20
+sudo apt-get install -y nasm cmake
+" | run "$1"
+
+}
+
+setup u10_32
+setup u10_64
