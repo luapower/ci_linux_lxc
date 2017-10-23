@@ -1,0 +1,13 @@
+#!/bin/bash
+
+sudo apt-get update
+sudo apt-get install -y lxc
+export MIRROR="http://old-releases.ubuntu.com/ubuntu"
+export SECURITY_MIRROR="$MIRROR"
+sudo -E lxc-create -n u10_64 -t ubuntu -- -r lucid
+sudo -E lxc-create -n u10_32 -t ubuntu -- -r lucid -a i386
+sudo rm /var/lib/lxc/u10_64/rootfs/dev/shm    # hack to make it work
+sudo rm /var/lib/lxc/u10_32/rootfs/dev/shm    # hack to make it work
+sudo lxc-start -n u10_64 -d
+sudo lxc-start -n u10_32 -d
+sudo lxc-ls --running         # should print: u10_64 u10_32

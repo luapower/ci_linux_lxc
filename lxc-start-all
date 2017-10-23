@@ -1,0 +1,4 @@
+# start LXC manually since VBox mounts luapower later than LXC starts.
+
+sudo lxc-start -n u10_32 -d
+sudo lxc-start -n u10_64 -d

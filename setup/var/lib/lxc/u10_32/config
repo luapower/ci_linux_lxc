@@ -1,0 +1,21 @@
+# Template used to create this container: /usr/share/lxc/templates/lxc-ubuntu
+# Parameters passed to the template: -r lucid -a i386
+# Template script checksum (SHA-1): 241970f22488a57b618a2d8383691fb51b396440
+# For additional config options, please look at lxc.container.conf(5)
+
+# Common configuration
+lxc.include = /usr/share/lxc/config/ubuntu.common.conf
+lxc.include = /usr/share/lxc/config/ubuntu.lucid.conf
+
+# Container specific configuration
+lxc.rootfs = /var/lib/lxc/u10_32/rootfs
+lxc.mount = /var/lib/lxc/u10_32/fstab
+lxc.utsname = u10_32
+lxc.arch = i686
+
+# Network configuration
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br0
+lxc.network.hwaddr = 00:16:3e:fd:ea:35
+lxc.network.ipv4 = 0.0.0.0

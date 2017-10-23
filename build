@@ -1,0 +1,4 @@
+bits="$1"
+repo="$2"
+[ "$repo" -a "$bits" ] || { echo "Usage: $0 32|64 REPO"; exit 1; }
+"./run$bits" bash -c 'cd luapower && mgit build '$repo

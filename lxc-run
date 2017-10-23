@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# run a command (or enter a shell) inside a LXC container
+
+name="$1"; shift
+[ "$name" ] || { echo "Usage: $0 NAME [COMMAND...]"; exit 1; }
+
+cmd="sudo lxc-attach -n $name --clear-env --keep-var=TERM"
+
+if [ "$1" ]; then
+    $cmd -- "$@"
+else
+    $cmd -- su - $USER
+fi
